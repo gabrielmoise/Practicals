@@ -1,0 +1,21 @@
+Question 1
+----------
+
+Keeping the same priority in both processes and forcing the prime process to need more computations would delay the multiplexing and the image showed on the LEDs is altered. The multiplexing method becomes obvious.
+Setting the display process' priority to high would solve this issue. In general, processes that use external devices should have a higher priority in order to ensure that the output is presented correctly and without delays. Computing primes slower does not affect the entire process while a slow multiplexing generates an unpleasant situation.
+
+Question 2
+----------
+
+Apparently, the Phos operating system starts the processes in the order they were defined in "init". If the printing process is started first, it will interleave with the other one and print numbers that increase with (almost) the same value from step to step. Conversely, if the process that increases "r" is run first, it will finish even before the other one starts. As a result, only "1000000" will be printed by the other process.   
+Probably, Phos reserves the time for every process that has to be run. Therefore, everything is deterministic up to some extent so the output should be the same for every run.   
+
+Question 3
+----------
+
+The presenter version can be found in file "today.c". The other one can be found in "today2.c".
+
+
+
+
+

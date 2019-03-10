@@ -1,0 +1,202 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_divsi3.o)
+                              heart.o (__aeabi_idivmod)
+/usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+                              /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_divsi3.o) (__aeabi_idiv0)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000000000000 0x0000000000040000 xr
+RAM              0x0000000020000000 0x0000000000004000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD heart.o
+LOAD startup.o
+LOAD /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a
+
+.text           0x0000000000000000      0x75c
+ *(.vectors)
+ .vectors       0x0000000000000000       0xc0 startup.o
+                0x0000000000000000                __vectors
+ *(.text*)
+ .text          0x00000000000000c0      0x330 heart.o
+                0x00000000000000c0                delay
+                0x00000000000000d2                show
+                0x000000000000010c                min
+                0x0000000000000114                max
+                0x000000000000011c                buttonA
+                0x000000000000012c                buttonB
+                0x000000000000013c                get_conf
+                0x0000000000000144                get_image
+                0x00000000000001c4                rot_down
+                0x00000000000001f8                rot_right
+                0x0000000000000240                moving_star
+                0x000000000000028c                catch_point
+                0x00000000000003c8                init
+ .text          0x00000000000003f0      0x15c startup.o
+                0x00000000000003f0                default_handler
+                0x00000000000003f0                spin
+                0x0000000000000438                ecb_handler
+                0x0000000000000438                systick_handler
+                0x0000000000000438                timer0_handler
+                0x0000000000000438                swi0_handler
+                0x0000000000000438                rtc0_handler
+                0x0000000000000438                rtc1_handler
+                0x0000000000000438                swi4_handler
+                0x0000000000000438                timer2_handler
+                0x0000000000000438                timer1_handler
+                0x0000000000000438                swi5_handler
+                0x0000000000000438                svc_handler
+                0x0000000000000438                swi1_handler
+                0x0000000000000438                qdec_handler
+                0x0000000000000438                spi0_twi0_handler
+                0x0000000000000438                rng_handler
+                0x0000000000000438                temp_handler
+                0x0000000000000438                power_clock_handler
+                0x0000000000000438                gpiote_handler
+                0x0000000000000438                swi2_handler
+                0x0000000000000438                ccm_aar_handler
+                0x0000000000000438                pendsv_handler
+                0x0000000000000438                swi3_handler
+                0x0000000000000438                spi1_twi1_handler
+                0x0000000000000438                radio_handler
+                0x0000000000000438                adc_handler
+                0x0000000000000438                hardfault_handler
+                0x0000000000000438                uart_handler
+                0x0000000000000438                nmi_handler
+                0x0000000000000438                lpcomp_handler
+                0x0000000000000438                wdt_handler
+                0x0000000000000440                null
+                0x0000000000000440                phos_init
+                0x0000000000000440                phos_start
+                0x0000000000000442                __reset
+                0x00000000000004bc                set_priority
+                0x000000000000051c                enable_irq
+                0x000000000000052c                disable_irq
+                0x000000000000053c                clear_pending
+ .text          0x000000000000054c      0x1d4 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_divsi3.o)
+                0x000000000000054c                __aeabi_idiv
+                0x000000000000054c                __divsi3
+                0x0000000000000718                __aeabi_idivmod
+ .text          0x0000000000000720        0x4 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+                0x0000000000000720                __aeabi_ldiv0
+                0x0000000000000720                __aeabi_idiv0
+ *(.rodata*)
+ .rodata        0x0000000000000724       0x36 heart.o
+                0x000000000000075c                . = ALIGN (0x4)
+ *fill*         0x000000000000075a        0x2 
+                0x000000000000075c                __etext = .
+
+.glue_7         0x000000000000075c        0x0
+ .glue_7        0x000000000000075c        0x0 linker stubs
+
+.glue_7t        0x000000000000075c        0x0
+ .glue_7t       0x000000000000075c        0x0 linker stubs
+
+.vfp11_veneer   0x000000000000075c        0x0
+ .vfp11_veneer  0x000000000000075c        0x0 linker stubs
+
+.v4_bx          0x000000000000075c        0x0
+ .v4_bx         0x000000000000075c        0x0 linker stubs
+
+.iplt           0x000000000000075c        0x0
+ .iplt          0x000000000000075c        0x0 heart.o
+
+.rel.dyn        0x000000000000075c        0x0
+ .rel.iplt      0x000000000000075c        0x0 heart.o
+
+.data           0x0000000020000000       0xc8 load address 0x000000000000075c
+                0x0000000020000000                __data_start = .
+ *(.data*)
+ .data          0x0000000020000000       0xc8 heart.o
+                0x0000000020000000                def_row
+                0x0000000020000064                def_column
+ .data          0x00000000200000c8        0x0 startup.o
+ .data          0x00000000200000c8        0x0 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_divsi3.o)
+ .data          0x00000000200000c8        0x0 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+                0x00000000200000c8                . = ALIGN (0x4)
+                0x00000000200000c8                __data_end = .
+
+.igot.plt       0x00000000200000c8        0x0 load address 0x0000000000000824
+ .igot.plt      0x00000000200000c8        0x0 heart.o
+
+.bss            0x00000000200000c8        0x0 load address 0x0000000000000824
+                0x00000000200000c8                __bss_start = .
+ *(.bss*)
+ .bss           0x00000000200000c8        0x0 heart.o
+ .bss           0x00000000200000c8        0x0 startup.o
+ .bss           0x00000000200000c8        0x0 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_divsi3.o)
+ .bss           0x00000000200000c8        0x0 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ *(COMMON)
+                0x00000000200000c8                . = ALIGN (0x4)
+                0x00000000200000c8                __bss_end = .
+                0x00000000200000c8                __end = .
+                0x0000000020004000                __stack = (ORIGIN (RAM) + LENGTH (RAM))
+                0x0000000020003800                __stack_limit = (__stack - 0x800)
+                0x0000000000000001                ASSERT ((__stack_limit >= __end), region RAM overlaps with stack)
+OUTPUT(heart.elf elf32-littlearm)
+
+.debug_info     0x0000000000000000      0x925
+ .debug_info    0x0000000000000000      0x5b7 heart.o
+ .debug_info    0x00000000000005b7      0x1ee startup.o
+ .debug_info    0x00000000000007a5       0xc0 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_divsi3.o)
+ .debug_info    0x0000000000000865       0xc0 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+
+.debug_abbrev   0x0000000000000000      0x38f
+ .debug_abbrev  0x0000000000000000      0x22f heart.o
+ .debug_abbrev  0x000000000000022f      0x138 startup.o
+ .debug_abbrev  0x0000000000000367       0x14 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_divsi3.o)
+ .debug_abbrev  0x000000000000037b       0x14 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+
+.debug_loc      0x0000000000000000      0x502
+ .debug_loc     0x0000000000000000      0x43a heart.o
+ .debug_loc     0x000000000000043a       0xc8 startup.o
+
+.debug_aranges  0x0000000000000000       0x80
+ .debug_aranges
+                0x0000000000000000       0x20 heart.o
+ .debug_aranges
+                0x0000000000000020       0x20 startup.o
+ .debug_aranges
+                0x0000000000000040       0x20 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_divsi3.o)
+ .debug_aranges
+                0x0000000000000060       0x20 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+
+.debug_ranges   0x0000000000000000       0x18
+ .debug_ranges  0x0000000000000000       0x18 heart.o
+
+.debug_line     0x0000000000000000      0x28a
+ .debug_line    0x0000000000000000      0x11c heart.o
+ .debug_line    0x000000000000011c       0x8d startup.o
+ .debug_line    0x00000000000001a9       0x7a /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_divsi3.o)
+ .debug_line    0x0000000000000223       0x67 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+
+.debug_str      0x0000000000000000      0x1d1
+ .debug_str     0x0000000000000000      0x121 heart.o
+ .debug_str     0x0000000000000121       0xb0 startup.o
+                                        0x11b (size before relaxing)
+
+.comment        0x0000000000000000       0x21
+ .comment       0x0000000000000000       0x21 heart.o
+                                         0x22 (size before relaxing)
+ .comment       0x0000000000000021       0x22 startup.o
+
+.ARM.attributes
+                0x0000000000000000       0x31
+ .ARM.attributes
+                0x0000000000000000       0x31 heart.o
+ .ARM.attributes
+                0x0000000000000031       0x31 startup.o
+ .ARM.attributes
+                0x0000000000000062       0x1e /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x0000000000000080       0x1e /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+
+.debug_frame    0x0000000000000000      0x214
+ .debug_frame   0x0000000000000000      0x148 heart.o
+ .debug_frame   0x0000000000000148       0xac startup.o
+ .debug_frame   0x00000000000001f4       0x20 /usr/lib/gcc/arm-none-eabi/7.1.0/thumb/v6-m/libgcc.a(_divsi3.o)

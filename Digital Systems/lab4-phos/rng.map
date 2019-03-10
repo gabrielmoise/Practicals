@@ -1,0 +1,335 @@
+Archive member included to satisfy reference by file (symbol)
+
+phos.a(serial.o)              rng.o (serial_printf)
+phos.a(timer.o)               rng.o (timer_init)
+phos.a(phos.o)                rng.o (send)
+phos.a(mpx-m0.o)              phos.a(phos.o) (setstack)
+phos.a(lib.o)                 phos.a(serial.o) (do_print)
+phos.a(startup.o)             phos.a(phos.o) (spin)
+/usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memset.o)
+                              phos.a(phos.o) (memset)
+/usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-strlen.o)
+                              phos.a(phos.o) (strlen)
+/usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-strncpy.o)
+                              phos.a(phos.o) (strncpy)
+/usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+                              phos.a(lib.o) (__aeabi_uidiv)
+/usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_divsi3.o)
+                              phos.a(timer.o) (__aeabi_idiv)
+/usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+                              /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+
+Allocating common symbols
+Common symbol       size              file
+
+timer               0x30              phos.a(timer.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000000000000 0x0000000000040000 xr
+RAM              0x0000000020000000 0x0000000000004000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD rng.o
+LOAD phos.a
+LOAD /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a
+LOAD /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a
+
+.text           0x0000000000000000     0x1b10
+ *(.vectors)
+ .vectors       0x0000000000000000       0xc0 phos.a(startup.o)
+                0x0000000000000000                __vectors
+ *(.text*)
+ .text          0x00000000000000c0      0x2bc rng.o
+                0x00000000000000c0                rng_task
+                0x000000000000017c                rng_init
+                0x00000000000001a0                random_int
+                0x00000000000001d0                roll
+                0x00000000000001e4                get_conf
+                0x00000000000001ec                get_image
+                0x000000000000026c                buttonA
+                0x000000000000027c                buttonB
+                0x000000000000028c                roll_task
+                0x000000000000032c                init
+ .text          0x000000000000037c      0x390 phos.a(serial.o)
+                0x00000000000003a4                serial_putc
+                0x00000000000006b0                serial_printf
+                0x00000000000006d0                serial_getc
+                0x00000000000006ea                serial_init
+ .text          0x000000000000070c      0x204 phos.a(timer.o)
+                0x000000000000070c                timer_task
+                0x0000000000000898                timer_init
+                0x00000000000008cc                delay
+ .text          0x0000000000000910      0x7a0 phos.a(phos.o)
+                0x000000000000098c                exit
+                0x0000000000000a7c                interrupt
+                0x0000000000000ae0                yield
+                0x0000000000000ae4                phos_start
+                0x0000000000000b00                send
+                0x0000000000000b04                receive
+                0x0000000000000b08                sendrec
+                0x0000000000000b0c                connect
+                0x0000000000000b10                setprio
+                0x0000000000000b14                dump
+                0x0000000000000b18                kprintf
+                0x0000000000000b48                panic
+                0x0000000000000b8c                intr_handler
+                0x0000000000000bf4                hardfault_handler
+                0x0000000000000c40                phos_init
+                0x0000000000000cb4                start
+                0x0000000000000d9c                system_call
+ .text          0x00000000000010b0       0x80 phos.a(mpx-m0.o)
+                0x00000000000010b0                setstack
+                0x00000000000010ea                svc_handler
+                0x00000000000010fa                phos_interrupt
+                0x0000000000001110                lock
+                0x000000000000111c                unlock
+                0x0000000000001120                restore
+ .text          0x0000000000001130      0x230 phos.a(lib.o)
+                0x0000000000001180                f_printc
+                0x000000000000118a                f_storec
+                0x0000000000001194                atoi
+                0x00000000000011d4                xtou
+                0x000000000000120e                _do_print
+                0x0000000000001318                do_print
+                0x000000000000132c                sprintf
+ .text          0x0000000000001360      0x154 phos.a(startup.o)
+                0x0000000000001360                default_handler
+                0x0000000000001360                spin
+                0x00000000000013a8                null
+                0x00000000000013aa                __reset
+                0x0000000000001424                set_priority
+                0x0000000000001484                enable_irq
+                0x0000000000001494                disable_irq
+                0x00000000000014a4                clear_pending
+ .text          0x00000000000014b4        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memset.o)
+ .text.memset   0x00000000000014b4       0x10 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memset.o)
+                0x00000000000014b4                memset
+ .text          0x00000000000014c4        0xe /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-strlen.o)
+                0x00000000000014c4                strlen
+ .text          0x00000000000014d2        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-strncpy.o)
+ .text.strncpy  0x00000000000014d2       0x28 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-strncpy.o)
+                0x00000000000014d2                strncpy
+ *fill*         0x00000000000014fa        0x2 
+ .text          0x00000000000014fc      0x114 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+                0x00000000000014fc                __udivsi3
+                0x00000000000014fc                __aeabi_uidiv
+                0x0000000000001608                __aeabi_uidivmod
+ .text          0x0000000000001610      0x1d4 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_divsi3.o)
+                0x0000000000001610                __aeabi_idiv
+                0x0000000000001610                __divsi3
+                0x00000000000017dc                __aeabi_idivmod
+ .text          0x00000000000017e4        0x4 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+                0x00000000000017e4                __aeabi_ldiv0
+                0x00000000000017e4                __aeabi_idiv0
+ *(.rodata*)
+ .rodata        0x00000000000017e8       0x18 rng.o
+ .rodata.str1.4
+                0x0000000000001800      0x11f rng.o
+ *fill*         0x000000000000191f        0x1 
+ .rodata.str1.4
+                0x0000000000001920       0x53 phos.a(serial.o)
+ *fill*         0x0000000000001973        0x1 
+ .rodata.str1.4
+                0x0000000000001974       0x38 phos.a(timer.o)
+                                         0x72 (size before relaxing)
+ .rodata        0x00000000000019ac       0x20 phos.a(phos.o)
+ .rodata.str1.4
+                0x00000000000019cc       0xd7 phos.a(phos.o)
+                                         0xdf (size before relaxing)
+ *fill*         0x0000000000001aa3        0x1 
+ .rodata        0x0000000000001aa4       0x58 phos.a(lib.o)
+ .rodata.str1.4
+                0x0000000000001afc       0x14 phos.a(lib.o)
+                                         0x11 (size before relaxing)
+                0x0000000000001b10                . = ALIGN (0x4)
+                0x0000000000001b10                __etext = .
+
+.glue_7         0x0000000000001b10        0x0
+ .glue_7        0x0000000000001b10        0x0 linker stubs
+
+.glue_7t        0x0000000000001b10        0x0
+ .glue_7t       0x0000000000001b10        0x0 linker stubs
+
+.vfp11_veneer   0x0000000000001b10        0x0
+ .vfp11_veneer  0x0000000000001b10        0x0 linker stubs
+
+.v4_bx          0x0000000000001b10        0x0
+ .v4_bx         0x0000000000001b10        0x0 linker stubs
+
+.iplt           0x0000000000001b10        0x0
+ .iplt          0x0000000000001b10        0x0 rng.o
+
+.rel.dyn        0x0000000000001b10        0x0
+ .rel.iplt      0x0000000000001b10        0x0 rng.o
+
+.data           0x0000000020000000       0xd4 load address 0x0000000000001b10
+                0x0000000020000000                __data_start = .
+ *(.data*)
+ .data          0x0000000020000000       0xc8 rng.o
+                0x0000000020000000                def_row
+                0x0000000020000064                def_column
+ .data          0x00000000200000c8        0x8 phos.a(serial.o)
+ .data          0x00000000200000d0        0x0 phos.a(timer.o)
+ .data          0x00000000200000d0        0x4 phos.a(phos.o)
+ .data          0x00000000200000d4        0x0 phos.a(mpx-m0.o)
+ .data          0x00000000200000d4        0x0 phos.a(lib.o)
+ .data          0x00000000200000d4        0x0 phos.a(startup.o)
+ .data          0x00000000200000d4        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memset.o)
+ .data          0x00000000200000d4        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-strlen.o)
+ .data          0x00000000200000d4        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-strncpy.o)
+ .data          0x00000000200000d4        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .data          0x00000000200000d4        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .data          0x00000000200000d4        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+                0x00000000200000d4                . = ALIGN (0x4)
+                0x00000000200000d4                __data_end = .
+
+.igot.plt       0x00000000200000d4        0x0 load address 0x0000000000001be4
+ .igot.plt      0x00000000200000d4        0x0 rng.o
+
+.bss            0x00000000200000d4      0x748 load address 0x0000000000001be4
+                0x00000000200000d4                __bss_start = .
+ *(.bss*)
+ .bss           0x00000000200000d4      0x190 rng.o
+ .bss           0x0000000020000264      0x11c phos.a(serial.o)
+ .bss           0x0000000020000380        0x4 phos.a(timer.o)
+ .bss           0x0000000020000384      0x464 phos.a(phos.o)
+ .bss           0x00000000200007e8        0x4 phos.a(mpx-m0.o)
+ .bss           0x00000000200007ec        0x0 phos.a(lib.o)
+ .bss           0x00000000200007ec        0x0 phos.a(startup.o)
+ .bss           0x00000000200007ec        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memset.o)
+ .bss           0x00000000200007ec        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-strlen.o)
+ .bss           0x00000000200007ec        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-strncpy.o)
+ .bss           0x00000000200007ec        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .bss           0x00000000200007ec        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .bss           0x00000000200007ec        0x0 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ *(COMMON)
+ COMMON         0x00000000200007ec       0x30 phos.a(timer.o)
+                0x00000000200007ec                timer
+                0x000000002000081c                . = ALIGN (0x4)
+                0x000000002000081c                __bss_end = .
+                0x000000002000081c                __end = .
+                0x0000000020004000                __stack = (ORIGIN (RAM) + LENGTH (RAM))
+                0x0000000020003800                __stack_limit = (__stack - 0x800)
+                0x0000000000000001                ASSERT ((__stack_limit >= __end), region RAM overlaps with stack)
+OUTPUT(rng.elf elf32-littlearm)
+
+.debug_info     0x0000000000000000     0x30e9
+ .debug_info    0x0000000000000000      0x768 rng.o
+ .debug_info    0x0000000000000768      0x5e4 phos.a(serial.o)
+ .debug_info    0x0000000000000d4c      0x411 phos.a(timer.o)
+ .debug_info    0x000000000000115d     0x1865 phos.a(phos.o)
+ .debug_info    0x00000000000029c2      0x564 phos.a(lib.o)
+ .debug_info    0x0000000000002f26      0x1c3 phos.a(startup.o)
+
+.debug_abbrev   0x0000000000000000      0xde6
+ .debug_abbrev  0x0000000000000000      0x29b rng.o
+ .debug_abbrev  0x000000000000029b      0x1d9 phos.a(serial.o)
+ .debug_abbrev  0x0000000000000474      0x1ce phos.a(timer.o)
+ .debug_abbrev  0x0000000000000642      0x469 phos.a(phos.o)
+ .debug_abbrev  0x0000000000000aab      0x228 phos.a(lib.o)
+ .debug_abbrev  0x0000000000000cd3      0x113 phos.a(startup.o)
+
+.debug_loc      0x0000000000000000     0x17ef
+ .debug_loc     0x0000000000000000      0x25f rng.o
+ .debug_loc     0x000000000000025f      0x12a phos.a(serial.o)
+ .debug_loc     0x0000000000000389      0x16c phos.a(timer.o)
+ .debug_loc     0x00000000000004f5      0xc7f phos.a(phos.o)
+ .debug_loc     0x0000000000001174      0x5b3 phos.a(lib.o)
+ .debug_loc     0x0000000000001727       0xc8 phos.a(startup.o)
+
+.debug_aranges  0x0000000000000000       0xc0
+ .debug_aranges
+                0x0000000000000000       0x20 rng.o
+ .debug_aranges
+                0x0000000000000020       0x20 phos.a(serial.o)
+ .debug_aranges
+                0x0000000000000040       0x20 phos.a(timer.o)
+ .debug_aranges
+                0x0000000000000060       0x20 phos.a(phos.o)
+ .debug_aranges
+                0x0000000000000080       0x20 phos.a(lib.o)
+ .debug_aranges
+                0x00000000000000a0       0x20 phos.a(startup.o)
+
+.debug_ranges   0x0000000000000000      0x138
+ .debug_ranges  0x0000000000000000       0x50 rng.o
+ .debug_ranges  0x0000000000000050       0x18 phos.a(timer.o)
+ .debug_ranges  0x0000000000000068       0x80 phos.a(phos.o)
+ .debug_ranges  0x00000000000000e8       0x50 phos.a(lib.o)
+
+.debug_line     0x0000000000000000      0x7f1
+ .debug_line    0x0000000000000000       0xf6 rng.o
+ .debug_line    0x00000000000000f6      0x16f phos.a(serial.o)
+ .debug_line    0x0000000000000265       0xa7 phos.a(timer.o)
+ .debug_line    0x000000000000030c      0x32b phos.a(phos.o)
+ .debug_line    0x0000000000000637      0x132 phos.a(lib.o)
+ .debug_line    0x0000000000000769       0x88 phos.a(startup.o)
+
+.debug_str      0x0000000000000000      0xa17
+ .debug_str     0x0000000000000000      0x1b3 rng.o
+                                        0x1f5 (size before relaxing)
+ .debug_str     0x00000000000001b3      0x15f phos.a(serial.o)
+                                        0x249 (size before relaxing)
+ .debug_str     0x0000000000000312       0x42 phos.a(timer.o)
+                                        0x181 (size before relaxing)
+ .debug_str     0x0000000000000354      0x60b phos.a(phos.o)
+                                        0x823 (size before relaxing)
+ .debug_str     0x000000000000095f       0x4c phos.a(lib.o)
+                                        0x140 (size before relaxing)
+ .debug_str     0x00000000000009ab       0x6c phos.a(startup.o)
+                                        0x110 (size before relaxing)
+
+.comment        0x0000000000000000       0x9f
+ .comment       0x0000000000000000       0x21 rng.o
+                                         0x22 (size before relaxing)
+ .comment       0x0000000000000021       0x7e phos.a(serial.o)
+                                         0x7f (size before relaxing)
+ .comment       0x000000000000009f       0x22 phos.a(timer.o)
+ .comment       0x000000000000009f       0x7f phos.a(phos.o)
+ .comment       0x000000000000009f       0x7f phos.a(lib.o)
+ .comment       0x000000000000009f       0x22 phos.a(startup.o)
+
+.ARM.attributes
+                0x0000000000000000       0x2f
+ .ARM.attributes
+                0x0000000000000000       0x31 rng.o
+ .ARM.attributes
+                0x0000000000000031       0x31 phos.a(serial.o)
+ .ARM.attributes
+                0x0000000000000062       0x31 phos.a(timer.o)
+ .ARM.attributes
+                0x0000000000000093       0x31 phos.a(phos.o)
+ .ARM.attributes
+                0x00000000000000c4       0x21 phos.a(mpx-m0.o)
+ .ARM.attributes
+                0x00000000000000e5       0x31 phos.a(lib.o)
+ .ARM.attributes
+                0x0000000000000116       0x31 phos.a(startup.o)
+ .ARM.attributes
+                0x0000000000000147       0x2c /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memset.o)
+ .ARM.attributes
+                0x0000000000000173       0x1c /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-strlen.o)
+ .ARM.attributes
+                0x000000000000018f       0x2c /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-strncpy.o)
+ .ARM.attributes
+                0x00000000000001bb       0x1e /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x00000000000001d9       0x1e /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x00000000000001f7       0x1e /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+
+.debug_frame    0x0000000000000000      0x6b0
+ .debug_frame   0x0000000000000000      0x110 rng.o
+ .debug_frame   0x0000000000000110       0xf0 phos.a(serial.o)
+ .debug_frame   0x0000000000000200       0x6c phos.a(timer.o)
+ .debug_frame   0x000000000000026c      0x228 phos.a(phos.o)
+ .debug_frame   0x0000000000000494       0xfc phos.a(lib.o)
+ .debug_frame   0x0000000000000590       0x94 phos.a(startup.o)
+ .debug_frame   0x0000000000000624       0x20 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memset.o)
+ .debug_frame   0x0000000000000644       0x2c /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-strncpy.o)
+ .debug_frame   0x0000000000000670       0x20 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .debug_frame   0x0000000000000690       0x20 /usr/local/Cellar/gcc-arm-none-eabi/20171218/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m/libgcc.a(_divsi3.o)
