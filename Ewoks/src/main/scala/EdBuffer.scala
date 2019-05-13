@@ -257,9 +257,9 @@ class EdBuffer {
     def search(s: String, pos: Int): Int = {
         if (s.isEmpty) return -1
         if (pos == -1) return -1
-        var where = kmp(s, pos, length - 1)
+        var where = kmp(s, pos, length - 1) // firstly, try from this point on
         if (where != -1) return where
-        kmp(s, 0, pos - 1)
+        kmp(s, 0, length - 1) // then try from the beginning
     }
 
 

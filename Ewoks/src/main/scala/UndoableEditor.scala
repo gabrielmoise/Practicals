@@ -9,6 +9,7 @@ import UndoHistory.Change
 /** The controller class for an  editor with undoable commands */
 class UndoableEditor extends Editor with UndoHistory {
     private var lastChange : Change = null
+
     
     /** Command: Insert a character and record change */
     override def insertCommand(ch: Char) {
@@ -24,14 +25,16 @@ class UndoableEditor extends Editor with UndoHistory {
         def undo() { ed.deleteRange(pos, text.length) }
         def redo() { ed.insert(pos, text) }
 
-        override def amalgamate(change: Change) = {
+        override def amalgamate(change: Change): Boolean = {
+            if (!Display.printable.contains(last_key)) return false // other command executed in between
+
             change match {
                 case other: AmalgInsertion =>
                     if (text.charAt(text.length-1) == '\n'
                             || other.pos != this.pos + this.text.length) 
                         false
                     else {
-                        text.insert(text.length, other.text)
+                        text.insert(text.length, other.text) // here amalgamates come
                         true
                     }
 

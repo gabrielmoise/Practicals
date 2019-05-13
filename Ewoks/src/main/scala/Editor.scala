@@ -21,6 +21,8 @@
   *    Ctrl-S goes to the next occurence(if there is one).
   *    Ctrl-L reverses the previous Ctrl-S(next occurence) command. It can be applied multiple times.
   *    Ctrl-L loses its effect if any other operation happens in the meantime.
+  *
+  * (*) for Sheet 2 - modified how amalgamated insertion behaves
   */
 
 
@@ -43,7 +45,10 @@ class Editor {
     /** The default string for a search */
     private var default_string: String = ""
 
-    
+    /** Last key pressed */
+    protected var last_key: Int = -1
+
+
     /** Show the buffer on a specified display */
     def activate(display: Display) {
         this.display = display
@@ -94,7 +99,7 @@ class Editor {
             case Editor.CTRLHOME =>
                 p = ed.getPos(0, 0)
             case Editor.CTRLEND =>
-                p = ed.getPos(ed.numLines - 1, ed.getLineLength(ed.numLines - 1) - 1)
+                p = ed.length - 1
             case _ =>
                 throw new Error("Bad direction for move")
         }
@@ -127,11 +132,11 @@ class Editor {
 
     /** Command: Cut the text between point and mark */
     def cutCommand: Boolean = {
-        if (!copyCommand) {beep(); return false}
-        val lstart = Math.min(ed.point, ed.mark)
-        val lend = Math.max(ed.point, ed.mark)
-        ed.deleteRange(lstart, lend - lstart + 1)
-        if (ed.point == lend) ed.point = lstart
+        if (!copyCommand) {beep(); return false} // we have to copy the text first
+        val lstart = Math.min(ed.point, ed.mark) // first position
+        val lend = Math.max(ed.point, ed.mark) // second position
+        ed.deleteRange(lstart, lend - lstart + 1) // remove between first and second position(inclusively)
+        if (ed.point == lend) ed.point = lstart // if the point was the last position, then it should go to the first one
         true
     }
 
@@ -152,7 +157,7 @@ class Editor {
 
     /** Command: Search for a given text */
     def searchText: Boolean = {
-        val s = MiniBuffer.readString(display, "Search: ", default_string)
+        val s = MiniBuffer.readString(display, "Search", default_string)
 
         // invalid input
         if (s == null || s == "") {
@@ -177,7 +182,7 @@ class Editor {
 
     /** Command: Search for a text interactively */
     def interactiveSearchText: Boolean = {
-        val (where, s) = MiniBuffer.startInteractiveSearch(display, "Search interactively: ", default_string, ed)
+        val (where, s) = MiniBuffer.startInteractiveSearch(display, "Search interactively", default_string, ed)
         if (where >= 0) ed.point = where
         if (where >= -1) default_string = s
         true
@@ -281,6 +286,7 @@ class Editor {
                 case Some(cmd) => obey(cmd)
                 case None => beep()
             }
+            last_key = key
         }
     }
 }

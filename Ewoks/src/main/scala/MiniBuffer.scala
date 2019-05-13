@@ -197,6 +197,7 @@ object MiniBuffer {
 
     /** Start an interactive search */
     def startInteractiveSearch(display: Display, prompt: String, default: String, _ed: EdBuffer): (Int, String) = {
+        // this is function that is applied at the beginning of each iteration of the command loop
         val f: (MiniBuffer => Int) = (me:MiniBuffer) => {
             val where = me.ed.search(me.text.toString(), me.mark)
             if (where != -1) {
