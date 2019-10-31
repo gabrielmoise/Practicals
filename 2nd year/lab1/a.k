@@ -1,0 +1,60 @@
+MODULE Main 0 0
+IMPORT Lib 0
+ENDHDR
+
+PROC MAIN 0 0 0
+!   i := 0;
+CONST 0
+STGW _i
+JUMP L3
+LABEL L2
+!     case i mod 6 of
+LDGW _i
+CONST 6
+MOD
+CASEJUMP 4
+CASEARM 0 L7
+CASEARM 3 L7
+CASEARM 1 L8
+CASEARM 4 L8
+JUMP L5
+LABEL L7
+!         0, 3: i := i + 4
+LDGW _i
+CONST 4
+PLUS
+STGW _i
+JUMP L6
+LABEL L8
+!       | 1, 4: i := i - 1
+LDGW _i
+CONST 1
+MINUS
+STGW _i
+JUMP L6
+LABEL L5
+!       i := -300
+CONST 300
+UMINUS
+STGW _i
+LABEL L6
+!     print i; newline
+LDGW _i
+CONST 0
+GLOBAL lib.print
+PCALL 1
+CONST 0
+GLOBAL lib.newline
+PCALL 0
+LABEL L3
+!   while i < 10 do
+LDGW _i
+CONST 10
+JLT L2
+JUMP L4
+LABEL L4
+LABEL L1
+RETURN
+END
+
+GLOVAR _i 4

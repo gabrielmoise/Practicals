@@ -1,0 +1,36 @@
+Compilers - Practical 1
+Alex Tatomir
+
+-- Implementing repeat statements
+1) added - RepeatStmt of stmt * expr (tree.ml, tree.mli)
+2) added tokens REPEAT and UNTIL + a reduction for REPEAT stmt UNTIL expr (parser.mly)
+3) added tokens' descriptions for REPEAT and UNTIL (lexer.mll)
+4) added translation for a RepeatStmt (kgen.ml)
+
+Tested on: repeat.p, emptyBody.p, extraSemicolon.p, myRepeatTest.p
+
+-- Implementing loop statements
+1) added - LoopStmt of stmt + Exit (tree.ml, tree.mli)
+2) added tokens LOOP and EXIT + reduction for LOOP stmt END + reduction for EXIT (parser.mly)
+3) added tokens' descriptions for LOOP and EXIT (lexer.mll)
+4) added translation for LoopStatement and Exit (kgen.ml)
+5) extended the intermediate code generator by adding an extra label at the end and a parameter to gen_stmt that points to the exit_label (kgen.ml)
+
+Tested on: loop.p, myLoopTest.p, exitAsReturn.p, exitNestedLoops.p, exitInWhile.p
+
+-- Implementing case statements
+1) added - CaseStmt of expr * (int list * stmt) list * stmt (tree.ml, tree.mli)
+2) added tokens CASE, OF, VBAR (parser.mly)
+3) added tokens' description for CASE, OF and VBAR (lexer.mll)
+4) added reduction for CASE expr OF cases [ELSE stmts] END, cases, case, numbers
+
+(all in kgen.ml below)
+5) added default and exit labels 
+6) added (label, cases) list and (label, case) list
+7) added translation for branches' statements
+8) added translation for control expression
+9) added code for casearms
+10) added translation for 'else' code
+11) combined all into one translation for "case ... of ... else ... end"
+
+Tested on: case.p, caseNoElse.p, caseNoArm.p, caseNothing.p, myCaseTest.p
