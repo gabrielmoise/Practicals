@@ -34,3 +34,8 @@ Tested on: loop.p, myLoopTest.p, exitAsReturn.p, exitNestedLoops.p, exitInWhile.
 11) combined all into one translation for "case ... of ... else ... end"
 
 Tested on: case.p, caseNoElse.p, caseNoArm.p, caseNothing.p, myCaseTest.p
+
+The entire test suite contains: gcd repeat emptyBody extraSemicolon myRepeatTest loop myLoopTest exitAsReturn exitNestedLoops exitInWhile case caseNoElse caseNoArm caseNothing myCaseTest sqrt elsif multipleWhile loopGcd ifExpr modifiedAnd
+
+
+

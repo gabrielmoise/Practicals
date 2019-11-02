@@ -56,6 +56,7 @@ type code =
   | LINE of int
   | SEQ of code list
   | NOP
+  | SWAP
 
 (* op_name -- map an operator to its name *)
 let op_name =
@@ -108,6 +109,7 @@ let fInst =
     | LINE n ->         fMeta "LINE $" [fNum n]
     | SEQ _ ->          fStr "SEQ ..."
     | NOP ->            fStr "NOP"
+    | SWAP ->           fStr "NOP"
 
 let mark_line n ys =
   if n = 0 then ys else

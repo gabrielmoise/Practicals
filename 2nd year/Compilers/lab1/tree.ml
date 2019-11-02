@@ -27,12 +27,14 @@ and stmt =
   | LoopStmt of stmt
   | Exit
   | CaseStmt of expr * (int list * stmt) list * stmt
+  | MultipleWhileStmt of (expr * stmt) list
 
 and expr = 
     Constant of int 
   | Variable of name
   | Monop of Keiko.op * expr 
   | Binop of Keiko.op * expr * expr
+  | IfExpr of expr * expr * expr
 
 let seq =
   function
@@ -65,6 +67,7 @@ let rec fExpr =
         fMeta "Monop_($, $)" [fStr (Keiko.op_name w); fExpr e1]
     | Binop (w, e1, e2) -> 
         fMeta "Binop_($, $, $)" [fStr (Keiko.op_name w); fExpr e1; fExpr e2]
+    | _ -> fMeta "????" []
 
 let rec fStmt =
   function

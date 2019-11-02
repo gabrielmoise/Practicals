@@ -31,6 +31,7 @@ type token =
   | EXIT
   | CASE
   | OF
+  | ELSIF
 
 val program :
   (Lexing.lexbuf  -> token) -> Lexing.lexbuf -> Tree.program

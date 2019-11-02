@@ -50,6 +50,7 @@ type code =
   | LINE of int
   | SEQ of code list
   | NOP
+  | SWAP
 
 (* |fInst| -- format an instruction for |printf| *)
 val fInst : code -> Print.arg

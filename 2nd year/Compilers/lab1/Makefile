@@ -1,9 +1,12 @@
 # lab1/Makefile
 
 ## Add your own test cases to this list
-TEST = gcd repeat emptyBody extraSemicolon myRepeatTest loop myLoopTest exitAsReturn exitNestedLoops exitInWhile case caseNoElse caseNoArm caseNothing myCaseTest
+TEST = gcd repeat emptyBody extraSemicolon myRepeatTest loop myLoopTest exitAsReturn exitNestedLoops exitInWhile case caseNoElse caseNoArm caseNothing myCaseTest sqrt elsif multipleWhile loopGcd ifExpr modifiedAnd
 
 all: ppc
+
+sheet2: sheet2.ml 
+	ocamlc sheet2.ml -o sheet2
 
 ppc: keiko.cmo lexer.cmo tree.cmo parser.cmo peepopt.cmo kgen.cmo main.cmo
 	ocamlc ../lib/common.cma $^ -o $@ 

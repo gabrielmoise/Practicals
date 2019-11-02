@@ -26,7 +26,8 @@ let kwtable =
       ("true", NUMBER 1); ("false", NUMBER 0);
       ("repeat", REPEAT); ("until", UNTIL);
       ("loop", LOOP); ("exit", EXIT);
-      ("case", CASE); ("of", OF) ]
+      ("case", CASE); ("of", OF);
+      ("elsif", ELSIF)]
 
 (* |idtable| -- table of all identifiers seen so far *)
 let idtable = Hashtbl.create 64

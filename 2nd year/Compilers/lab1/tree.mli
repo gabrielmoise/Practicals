@@ -28,12 +28,14 @@ and stmt =
   | LoopStmt of stmt
   | Exit
   | CaseStmt of expr * (int list * stmt) list * stmt
+  | MultipleWhileStmt of (expr * stmt) list
 
 and expr = 
     Constant of int 
   | Variable of name
   | Monop of Keiko.op * expr 
   | Binop of Keiko.op * expr * expr
+  | IfExpr of expr * expr * expr
 
 (* seq -- neatly join a list of statements into a sequence *)
 val seq : stmt list -> stmt

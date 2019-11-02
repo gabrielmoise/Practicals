@@ -17,6 +17,7 @@ open Tree
 %token                  REPEAT UNTIL
 %token                  LOOP EXIT
 %token                  CASE OF
+%token                  ELSIF
 
 %type <Tree.program>    program
 
@@ -47,6 +48,11 @@ stmt :
   | EXIT                                { Exit }
   | CASE expr OF cases END              { CaseStmt ($2, $4, Skip) }
   | CASE expr OF cases ELSE stmts END   { CaseStmt ($2, $4, $6) }
+  | WHILE expr DO stmts elsifs END      { MultipleWhileStmt (($2, $4) :: $5)}
+
+elsifs:
+    ELSIF expr DO stmts                 { [($2, $4)] }
+  | ELSIF expr DO stmts elsifs          { ($2, $4) :: $5 }
 
 cases :
     /* empty */                         { [] }
@@ -68,6 +74,7 @@ simple :
     term                                { $1 }
   | simple ADDOP term                   { Binop ($2, $1, $3) }
   | simple MINUS term                   { Binop (Minus, $1, $3) } ;
+  | IF expr THEN expr ELSE expr         { IfExpr ($2, $4, $6) }
 
 term :
     factor                              { $1 }
