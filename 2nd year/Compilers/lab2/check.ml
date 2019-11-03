@@ -6,6 +6,71 @@ open Keiko
 open Tree 
 open Dict 
 
+(* USED IN EXERCISE 3.4 *)
+
+(* |warning| -- warn user *)
+let warning str = Printf.eprintf "--- Warning: %s\n" str 
+
+(* |in_list| -- check if element in list *)
+let in_list lst x = List.exists (fun v -> v = x) lst
+
+(* |intersect| -- get intersection of two sets *)
+let rec intersect xss ys =
+    match xss with
+      [] -> []
+    | (x :: xs) -> 
+        let other = intersect xs ys in
+        if (in_list ys x) then x :: other else other 
+
+(* |check_expr_initialised| -- check if an expression has uninitialized variables *)
+let rec check_expr_initialised before e = 
+    match e.e_guts with 
+    |  Variable x -> 
+        if not (in_list before x.x_name) then
+            warning ("usage of (possibly) undeclared variable " ^ x.x_name)
+    | Sub (v, e) -> ()
+    | Constant (n, t) -> () 
+    | Monop (w, e1) -> 
+        check_expr_initialised before e1
+    | Binop (w, e1, e2) -> 
+        check_expr_initialised before e1;
+        check_expr_initialised before e2
+
+
+(* |check_initialised| -- check if this statement does not have uninitialized variables *)
+let rec check_initialised before stmt =
+    match stmt with 
+      Skip -> before
+    | Seq ss -> 
+        let mutable_before = ref before in
+        let run_on stmt =
+            mutable_before := check_initialised !mutable_before stmt in
+        List.iter run_on ss; !mutable_before
+    | Assign (lhs, rhs) -> 
+        check_expr_initialised before rhs; 
+        begin
+        match lhs.e_guts with
+          | Variable x ->
+            (x.x_name :: before)    
+          | _ -> 
+            before
+        end
+    | Print e ->
+        before
+    | Newline ->
+        before
+    | IfStmt (cond, thenpt, elsept) ->
+        check_expr_initialised before cond;
+        let t1 = check_initialised before thenpt 
+        and t2 = check_initialised before elsept in
+        intersect t1 t2
+    | WhileStmt (cond, body) ->
+        check_expr_initialised before cond;
+        check_initialised before body
+
+(* END OF CODE FFOR EXERCISE 3.4 *)
+
+
 (* |err_line| -- line number for error messages *)
 let err_line = ref 1
 
@@ -127,6 +192,7 @@ let check_decls ds env0 =
 (* |annotate| -- check and annotate a program *)
 let annotate (Program (ds, ss)) =
   let env = check_decls ds init_env in
+  check_initialised [] ss;
   check_stmt ss env
 
 
