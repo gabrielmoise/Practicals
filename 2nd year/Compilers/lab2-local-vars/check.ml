@@ -112,7 +112,6 @@ let rec check_stmt s env =
         level := !level + 1;
         let local_env = check_decls decls env in
         check_stmt body local_env;
-        level := !level - 1;
 
 (* |make_def| -- construct definition of variable *)
 and make_def x t a = { d_tag = x; d_type = t; d_lab = a }

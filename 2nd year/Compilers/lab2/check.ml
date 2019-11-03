@@ -66,7 +66,8 @@ let rec check_initialised before stmt =
         intersect t1 t2
     | WhileStmt (cond, body) ->
         check_expr_initialised before cond;
-        check_initialised before body
+        check_initialised before body;
+        before
 
 (* END OF CODE FFOR EXERCISE 3.4 *)
 

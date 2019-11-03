@@ -1,0 +1,53 @@
+MODULE Main 0 0
+IMPORT Lib 0
+ENDHDR
+
+PROC MAIN 0 0 0
+!     y := 4;
+CONST 4
+GLOBAL _y0
+STOREW
+!             z := 100;
+CONST 100
+GLOBAL _z2
+STOREW
+!                 z := 3;
+CONST 3
+GLOBAL _z3
+STOREW
+!                 y := 3 + 4 + z; x := y * y;
+CONST 3
+CONST 4
+PLUS
+GLOBAL _z3
+LOADW
+PLUS
+GLOBAL _y1
+STOREW
+GLOBAL _y1
+LOADW
+GLOBAL _y1
+LOADW
+TIMES
+GLOBAL _x0
+STOREW
+!     print x + y;
+GLOBAL _x0
+LOADW
+GLOBAL _y0
+LOADW
+PLUS
+CONST 0
+GLOBAL lib.print
+PCALL 1
+CONST 0
+GLOBAL lib.newline
+PCALL 0
+RETURN
+END
+
+GLOVAR _z3 4
+GLOVAR _z2 4
+GLOVAR _y1 4
+GLOVAR _y0 4
+GLOVAR _x0 4
