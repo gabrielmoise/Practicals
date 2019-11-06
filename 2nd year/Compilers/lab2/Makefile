@@ -1,7 +1,7 @@
 # lab2/Makefile
 
 ## Add your own test cases to this list
-TEST = gcd notInitialised array pascal binary storeTest nestedSubscript
+TEST = gcd notInitialised array pascal binary storeTest nestedSubscript checkBounds constantIndex
 
 all: ppc
 

@@ -14,3 +14,40 @@ Added semantic check for subscripts and ensured that no array can be the LHS or 
 Got address for subscripts(gen_addr), reserved appropriate space for each variable(gen_decl) and loaded/stored with the correct instructions depending on type(gen_expr and gen_stmt).
 
 Tested on: storeTest, nestedSubscript
+
+5.6 - Run-time checks and optimisation (optional)
+-------------------------------------------------
+* Added checks for out-of-bounds errors in gen_addr. The current line is updated by generating a variable and used in BOUND.
+
+Can be tested with: checkBounds.p
+
+* Removed multiplications by 1 with the code below:
+    ...
+    let times_seq = if element_size = 1 then NOP else SEQ [CONST element_size; BINOP Times] in
+    SEQ [get_base_addr; get_index; CONST array_length; BOUND !err_line; 
+         times_seq; OFFSET]
+
+Optimisation can be observer in: binary.p
+
+* Removed multiplications needed to get the address of an array element. Below you can find a part of the code generated for: constantIndex.p
+
+GLOBAL _x
+CONST 1036800
+OFFSET
+CONST 3648
+OFFSET
+CONST 188
+
+used to get the address of x[27][19][47]. Further impovements can be done by implementing an auxiliary function 
+
+val constant_address_of : expr -> (int, string, int) option
+
+which, given an expression that represents an array with constant indices, returns the line, the identifier of the array and the address of the required slot. If the given expression is not of this kind, None is returned. This approach leads to: 
+
+GLOBAL _x
+CONST 1040636
+OFFSET
+
+See my code for more details.
+
+
