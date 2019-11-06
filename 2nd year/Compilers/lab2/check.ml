@@ -66,10 +66,10 @@ let rec check_initialised before stmt =
         intersect t1 t2
     | WhileStmt (cond, body) ->
         check_expr_initialised before cond;
-        check_initialised before body;
+        let _ = check_initialised before body in
         before
 
-(* END OF CODE FFOR EXERCISE 3.4 *)
+(* END OF CODE FOR EXERCISE 3.4 *)
 
 
 (* |err_line| -- line number for error messages *)
@@ -138,7 +138,10 @@ and expr_type e env =
       Variable x -> 
         lookup_def x env
     | Sub (v, e) ->
-        failwith "subscripts not implemented"
+        let v_type = check_expr v env
+        and e_type = check_expr e env in
+        if (not (is_array v_type)) || (e_type <> Integer) then type_error ();
+        base_type v_type
     | Constant (n, t) -> t
     | Monop (w, e1) -> 
         let t = check_expr e1 env in
@@ -157,6 +160,7 @@ let rec check_stmt s env =
     | Assign (lhs, rhs) ->
         let ta = check_expr lhs env
         and tb = check_expr rhs env in
+        if is_array ta then sem_error "can not assign to an array" []; 
         if ta <> tb then sem_error "type mismatch in assignment" []
     | Print e ->
         let t = check_expr e env in
@@ -193,7 +197,7 @@ let check_decls ds env0 =
 (* |annotate| -- check and annotate a program *)
 let annotate (Program (ds, ss)) =
   let env = check_decls ds init_env in
-  check_initialised [] ss;
+  let _ = check_initialised [] ss in
   check_stmt ss env
 
 

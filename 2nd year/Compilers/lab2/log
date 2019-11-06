@@ -1,0 +1,16 @@
+Compilers - Practical 2
+Alex Tatomir
+
+5.2 - Functions on types
+------------------------
+Added three functions (type_size, is_array, base_type) along with two exceptions(Not_an_array, Type_not_define).
+
+5.3 - Semantic analysis
+-----------------------
+Added semantic check for subscripts and ensured that no array can be the LHS or RHS of an assignment.
+
+5.4 - Code generation
+---------------------
+Got address for subscripts(gen_addr), reserved appropriate space for each variable(gen_decl) and loaded/stored with the correct instructions depending on type(gen_expr and gen_stmt).
+
+Tested on: storeTest, nestedSubscript

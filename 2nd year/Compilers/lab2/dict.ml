@@ -12,6 +12,12 @@ type ptype =
   | Array of int * ptype
   | Void
 
+(* Not an array exception *)
+exception Not_an_array of ptype
+
+(* Type not defined, probably void *)
+exception Type_not_defined of ptype
+
 (* |def| -- definitions in environment *)
 type def = 
   { d_tag: ident;               (* Name *)
@@ -34,3 +40,26 @@ let lookup x (Env e) = IdMap.find x e
 
 (* |init_env| -- empty environment *)
 let init_env = Env IdMap.empty
+
+(* |type_size| -- return size of this type *)
+let rec type_size = function 
+  | Integer -> 4
+  | Boolean -> 1
+  | Array (count, sub_type) -> count * (type_size sub_type)
+  | x -> raise (Type_not_defined x)
+
+(* |is_array| -- check if the given type is an array *)
+let is_array = function
+  | Array _ -> true
+  | _ -> false
+
+(* |base_type| -- return the base type of an array *)
+let base_type = function 
+  | Array (_, sub_type) -> sub_type
+  | x -> raise (Not_an_array x)
+
+(* |length_of| -- get length of an array *)
+let length_of = function
+  | Array (x, _) -> x
+  | x -> raise (Not_an_array x)
+

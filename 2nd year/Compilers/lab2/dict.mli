@@ -25,3 +25,21 @@ val lookup : ident -> environment -> def
 
 (* |init_env| -- initial empty environment *)
 val init_env : environment
+
+(* |type_size| -- return size of this type *)
+val type_size : ptype -> int
+
+(* |is_array| -- check if the given type is an array *)
+val is_array : ptype -> bool
+
+(* |base_type| -- return the base type of an array *)
+val base_type : ptype -> ptype
+
+(* |length_of| -- get length of an array *)
+val length_of : ptype -> int
+
+(* Not an array exception *)
+exception Not_an_array of ptype
+
+(* Type not defined, probably Void *)
+exception Type_not_defined of ptype

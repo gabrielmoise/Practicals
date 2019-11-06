@@ -18,8 +18,9 @@ let rec line_number e =
 (* |gen_expr| -- generate code for an expression *)
 let rec gen_expr e =
   match e.e_guts with
-      Variable _ | Sub _ ->
-        SEQ [gen_addr e; LOADW]
+    | Variable _ | Sub _ ->
+        let load_op = if e.e_type = Integer then LOADW else LOADC in
+        SEQ [gen_addr e; load_op]
     | Constant (n, t) ->
         CONST n
     | Monop (w, e1) ->
@@ -33,6 +34,11 @@ and gen_addr v =
       Variable x ->
         let d = get_def x in
         SEQ [LINE x.x_line; GLOBAL d.d_lab]
+    | Sub (v, e) ->
+        let get_base_addr = gen_addr v 
+        and get_index = gen_expr e
+        and element_size = type_size (base_type v.e_type) in 
+        SEQ [get_base_addr; get_index; CONST element_size; BINOP Times; OFFSET]
     | _ ->
         failwith "gen_addr"
 
@@ -62,7 +68,8 @@ let rec gen_stmt =
       Skip -> NOP
     | Seq stmts -> SEQ (List.map gen_stmt stmts)
     | Assign (v, e) ->
-        SEQ [LINE (line_number v); gen_expr e; gen_addr v; STOREW]
+        let store_op = if v.e_type = Integer then STOREW else STOREC in
+        SEQ [LINE (line_number v); gen_expr e; gen_addr v; store_op]
     | Print e ->
         SEQ [gen_expr e; CONST 0; GLOBAL "lib.print"; PCALL 1]
     | Newline ->
@@ -78,9 +85,9 @@ let rec gen_stmt =
           LABEL lab2; gen_cond test lab1 lab3; LABEL lab3]
 
 let gen_decl (Decl (xs, t)) =
+  let s = type_size t in
   List.iter (fun x ->
       let d = get_def x in
-      let s = 4 in
       printf "GLOVAR $ $\n" [fStr d.d_lab; fNum s]) xs
 
 (* |translate| -- generate code for the whole program *)
